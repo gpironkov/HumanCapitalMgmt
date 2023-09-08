@@ -1,24 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PeopleAPI.Common;
 using PeopleAPI.Controllers.Common;
 using PeopleAPI.Services;
 
 namespace PeopleAPI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = GlobalConstants.HumanResourcesRoleName)]
     public class PeopleController : BaseApiController
     {
         private readonly IPeople _peopleService;
 
         public PeopleController(IPeople peopleService)
         {
-            _peopleService = peopleService;        
+            _peopleService = peopleService;
         }
 
         [HttpGet("people")]
         public async Task<IActionResult> GetAllPeople()
         {
-            return Ok(await _peopleService.GetAllUsersAsync()); //"You hit me!";
+            return Ok(await _peopleService.GetAllUsersAsync());
         }
 
         [HttpGet("{id}")]

@@ -1,10 +1,9 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Tokens;
 using PeopleAPI;
+using PeopleAPI.Middleware;
 using PeopleAPI.Services;
 using System.Text;
 
@@ -55,6 +54,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ServerErrorException>();
 
 app.UseHttpsRedirection();
 

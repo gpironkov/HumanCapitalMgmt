@@ -9,6 +9,6 @@ namespace PeopleAPI.Services
 
         Task<string> RegisterUserAsync(RegisterUserDto user);
 
-        string GenerateTokenString(LoginUserDto user);
+        string GenerateTokenString(LoginUserDto user, IEnumerable<string> roles);
     }
 }

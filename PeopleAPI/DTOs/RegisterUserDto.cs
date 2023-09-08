@@ -17,5 +17,7 @@
         public decimal Salary { get; set; }
 
         public string DepartmentId { get; set; }
+
+        public string UserRole { get; set; }
     }
 }

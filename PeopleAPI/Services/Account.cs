@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using PeopleAPI.DTOs;
 using PeopleAPI.Models;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -42,6 +43,13 @@ namespace PeopleAPI.Services
                 DepartmentId = user.DepartmentId
             };
 
+            var role = new IdentityRole
+            { 
+                Name = user.UserRole
+            };
+
+            var userRole = await _userManager.AddToRoleAsync(identityUser, role.Name);
+
             if (!result.Succeeded)
             {
                 var errorList = result.Errors.Select(error => error.Description).ToList();
@@ -66,13 +74,17 @@ namespace PeopleAPI.Services
             return await _userManager.CheckPasswordAsync(identityUser, user.Password);
         }
 
-        public string GenerateTokenString(LoginUserDto user)
+        public string GenerateTokenString(LoginUserDto user, IEnumerable<string> roles)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email,user.UserName),
-                new Claim(ClaimTypes.Role,"Admin"),
+                new Claim(ClaimTypes.Email, user.UserName)
             };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }            
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value));
 
