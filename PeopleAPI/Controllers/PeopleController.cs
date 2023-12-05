@@ -6,7 +6,7 @@ using PeopleAPI.Services;
 
 namespace PeopleAPI.Controllers
 {
-    [Authorize(Roles = GlobalConstants.HumanResourcesRoleName)]
+    [Authorize(Roles = $"{GlobalConstants.HumanResourcesRoleName}, {GlobalConstants.ManagerRoleName}")]
     public class PeopleController : BaseApiController
     {
         private readonly IPeople _peopleService;

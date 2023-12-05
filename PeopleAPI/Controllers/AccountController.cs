@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PeopleAPI.Common;
 using PeopleAPI.Controllers.Common;
 using PeopleAPI.DTOs;
 using PeopleAPI.Services;
+using System.Data;
 
 namespace PeopleAPI.Controllers
 {
@@ -37,6 +40,7 @@ namespace PeopleAPI.Controllers
             return BadRequest("Username or password is invalid!");
         }
 
+        [Authorize(Roles = $"{GlobalConstants.HumanResourcesRoleName},{GlobalConstants.ManagerRoleName}")]
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser(RegisterUserDto user)
         { 
