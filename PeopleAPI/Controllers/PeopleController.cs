@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using PeopleAPI.Common;
-using PeopleAPI.Controllers.Common;
-using PeopleAPI.Services;
-
-namespace PeopleAPI.Controllers
+﻿namespace PeopleAPI.Controllers
 {
     [Authorize(Roles = $"{GlobalConstants.HumanResourcesRoleName}, {GlobalConstants.ManagerRoleName}")]
     public class PeopleController : BaseApiController

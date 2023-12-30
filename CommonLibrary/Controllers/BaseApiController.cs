@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace PeopleAPI.Controllers.Common
+﻿namespace CommonLibrary.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

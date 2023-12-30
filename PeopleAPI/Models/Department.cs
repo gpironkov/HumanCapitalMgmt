@@ -1,4 +1,4 @@
-﻿using PeopleAPI.Models.Common;
+﻿global using PeopleAPI.Models.Common;
 
 namespace PeopleAPI.Models
 {

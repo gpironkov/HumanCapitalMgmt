@@ -1,12 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using PeopleAPI;
-using PeopleAPI.Middleware;
-using PeopleAPI.Services;
-using System.Text;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<PeopleDbContext>(opt =>

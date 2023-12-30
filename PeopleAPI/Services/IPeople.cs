@@ -1,11 +1,9 @@
-﻿using PeopleAPI.DTOs;
-
-namespace PeopleAPI.Services
+﻿namespace PeopleAPI.Services
 {
     public interface IPeople
     {
-        Task<IEnumerable<AspNetUsersDto>> GetAllUsersAsync();
+        Task<IEnumerable<ResponseAspNetUsersDto>> GetAllUsersAsync();
 
-        Task<AspNetUsersDto> GetUserByIdAsync(string userId);
+        Task<ResponseAspNetUsersDto> GetUserByIdAsync(string userId);
     }
 }

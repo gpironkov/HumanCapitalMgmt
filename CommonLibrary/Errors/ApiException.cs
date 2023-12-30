@@ -1,4 +1,4 @@
-﻿namespace PeopleAPI.Errors
+﻿namespace CommonLibrary.Errors
 {
     public class ApiException
     {

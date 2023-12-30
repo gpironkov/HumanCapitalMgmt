@@ -1,8 +1,4 @@
-﻿using System.Net;
-using System.Text.Json;
-using PeopleAPI.Errors;
-
-namespace PeopleAPI.Middleware
+﻿namespace CommonLibrary.Middleware
 {
     public class ServerErrorException
     {

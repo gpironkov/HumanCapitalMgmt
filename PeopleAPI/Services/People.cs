@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using PeopleAPI.DTOs;
-
-namespace PeopleAPI.Services
+﻿namespace PeopleAPI.Services
 {
     public class People : IPeople
     {
@@ -15,21 +11,22 @@ namespace PeopleAPI.Services
             _peopleDbContext = peopleDbContext;
         }
 
-        public async Task<IEnumerable<AspNetUsersDto>> GetAllUsersAsync()
+        public async Task<IEnumerable<ResponseAspNetUsersDto>> GetAllUsersAsync()
         {
             var usersData = await GetUserData().ToListAsync();
 
             return usersData;
         }
 
-        public async Task<AspNetUsersDto> GetUserByIdAsync(string userId)
+        public async Task<ResponseAspNetUsersDto> GetUserByIdAsync(string userId)
         {
-            var userData = await GetUserData().Where(u => u.UserId == userId).FirstOrDefaultAsync();
+            var userData = await GetUserData().ToListAsync();
+            var user = userData.Where(u => u.UserId == userId).FirstOrDefault();
 
-            return userData;
+            return user;
         }
 
-        private IQueryable<AspNetUsersDto> GetUserData()
+        private IQueryable<ResponseAspNetUsersDto> GetUserData()
         {
             var userData = _userManager.Users
                 .Join(_peopleDbContext.Employees, u => u.Id, e => e.UserId, (u, e) => new
@@ -38,21 +35,9 @@ namespace PeopleAPI.Services
                     Employee = e
                 })
                 //.Where(ue => ue.Employee != null)
-                .Select(ue => new AspNetUsersDto
-                {
-                    UserId = ue.User.Id,
-                    UserName = ue.User.UserName,
-                    Email = ue.User.Email,
-                    PhoneNumber = ue.User.PhoneNumber,
-                    Employee = new EmployeeDto
-                    {
-                        FirstName = ue.Employee.FirstName,
-                        SecondName = ue.Employee.SecondName,
-                        LastName = ue.Employee.LastName,
-                        Salary = ue.Employee.Salary,
-                        Department = ue.Employee.Department.Name
-                    }
-                });
+                .Select(ue => new ResponseAspNetUsersDto(ue.User.Id, ue.User.UserName, ue.User.Email, ue.User.PhoneNumber,
+                    new ResponseEmployeeDto(ue.Employee.FirstName, ue.Employee.SecondName, ue.Employee.LastName, ue.Employee.Salary, ue.Employee.Department.Name)
+                ));
 
             return userData;
         }

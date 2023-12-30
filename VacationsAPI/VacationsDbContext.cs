@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using VacationsAPI.Models;
-
-namespace VacationsAPI
+﻿namespace VacationsAPI
 {
     public class VacationsDbContext : DbContext
     {

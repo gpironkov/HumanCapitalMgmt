@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using PeopleAPI.Models.Common;
-
-namespace PeopleAPI.Models
+﻿namespace PeopleAPI.Models
 {
     public class Employee : BaseModel
     {

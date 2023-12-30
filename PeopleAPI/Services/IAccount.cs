@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PeopleAPI.DTOs;
-
-namespace PeopleAPI.Services
+﻿namespace PeopleAPI.Services
 {
     public interface IAccount
     {

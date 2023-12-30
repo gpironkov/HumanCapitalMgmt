@@ -1,4 +1,4 @@
-﻿namespace PeopleAPI.Common
+﻿namespace CommonLibrary
 {
     public static class GlobalConstants
     {
