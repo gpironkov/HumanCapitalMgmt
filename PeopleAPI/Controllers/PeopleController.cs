@@ -1,4 +1,6 @@
-﻿namespace PeopleAPI.Controllers
+﻿using CommonLibrary.Models;
+
+namespace PeopleAPI.Controllers
 {
     [Authorize(Roles = $"{GlobalConstants.HumanResourcesRoleName}, {GlobalConstants.ManagerRoleName}")]
     public class PeopleController : BaseApiController
@@ -11,9 +13,21 @@
         }
 
         [HttpGet("people")]
-        public async Task<IActionResult> GetAllPeople()
+        public async Task<IActionResult> GetAllPeople([FromQuery]PagingParameters pagingParameters, [FromQuery]FilterSalaryParameters salaryParameters) //test people?size=2&page=3; people?MinSalary=2200
         {
-            return Ok(await _peopleService.GetAllUsersAsync());
+            var allPeople = await _peopleService.GetAllUsersAsync();
+            if (salaryParameters.MinSalary != null)
+            {
+                allPeople = allPeople.Where(s => s.Employee.Salary >= salaryParameters.MinSalary);
+            }
+            if (salaryParameters.MaxSalary != null)
+            {
+                allPeople = allPeople.Where(s => s.Employee.Salary <= salaryParameters.MaxSalary);
+            }
+
+            allPeople = allPeople.Skip(pagingParameters.Size * (pagingParameters.Page - 1)).Take(pagingParameters.Size);
+
+            return Ok(allPeople);
         }
 
         [HttpGet("{id}")]
