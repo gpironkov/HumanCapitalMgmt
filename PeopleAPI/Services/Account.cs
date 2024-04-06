@@ -36,7 +36,8 @@ namespace PeopleAPI.Services
                 LastName = user.LastName,
                 SecondName = user.SecondName,
                 Salary = user.Salary,
-                DepartmentId = user.DepartmentId
+                DepartmentId = user.DepartmentId,
+                DaysLeft = 25
             };
 
             var role = new IdentityRole

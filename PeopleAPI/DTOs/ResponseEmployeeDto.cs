@@ -9,6 +9,8 @@
 
         decimal Salary,
 
-        string Department
+        string Department,
+
+        ushort DaysLeft
     );
 }

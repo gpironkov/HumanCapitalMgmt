@@ -21,5 +21,7 @@
 
         public virtual Department Department { get; set; }
         public string DepartmentId { get; set; }
+
+        public ushort DaysLeft { get; set; }
     }
 }

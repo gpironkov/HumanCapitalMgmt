@@ -36,7 +36,8 @@
                 })
                 //.Where(ue => ue.Employee != null)
                 .Select(ue => new ResponseAspNetUsersDto(ue.User.Id, ue.User.UserName, ue.User.Email, ue.User.PhoneNumber,
-                    new ResponseEmployeeDto(ue.Employee.FirstName, ue.Employee.SecondName, ue.Employee.LastName, ue.Employee.Salary, ue.Employee.Department.Name)
+                    new ResponseEmployeeDto(ue.Employee.FirstName, ue.Employee.SecondName, ue.Employee.LastName, ue.Employee.Salary, 
+                        ue.Employee.Department.Name, ue.Employee.DaysLeft)
                 ));
 
             return userData;
